@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block body_block %}
+{% load static %}
+
+<section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h2>Đặt hàng</h2>
+              <p>Điền đầy đủ thông tin để tiến hành đặt hàng</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+</section>
+<section class="sample-text-area">
+    <div class="container"></div>
+        <table align="center">
+            <tr>
+            <td valign="top" width='50%'>
+            <h1>Khách hàng</h1>
+            <form action="." method="post">
+            <table>
+            {% for field in form %}
+            <tr>
+            <td>{{field.label}} </td>
+            <td>{{field}}</td>
+            </tr>
+            {% endfor %}
+            <tr><td colspan="2" align="center">
+            <p><input type ="submit" value = "Đặt hàng" class="btn btn-primary"></p></td>
+            </tr>
+            </table>
+            {% csrf_token %}
+            </form>
+            </td>
+            <td valign="top">
+            <h1>Chi tiết đơn hàng</h1>
+            <ul>
+            {% for item in cart %}
+            <li>
+            {{item.quantity}} x
+            {{item.product.name}} = <span>{{item.total_fee}}</span>
+            </li>
+            {% endfor %}
+            </ul>
+            <ul>Tổng: {{cart.get_total_fee}} vnđ</ul>
+            </td>
+            </tr>
+        </table>
+    </div>
+</section>
+{% endblock %}
